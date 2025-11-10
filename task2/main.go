@@ -58,6 +58,7 @@ type Count struct {
 
 func main() {
 	fmt.Println("Hello, world!")
+	fmt.Println("I m main function")
 
 	// 指针
 	var a int = 5
