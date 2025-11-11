@@ -34,17 +34,22 @@ type User struct {
 
 type Post struct {
 	gorm.Model
-	Title        string `gorm:"column:title"`
-	Content      string `gorm:"column:content"`
-	UserID       uint   `gorm:"column:user_id"`
-	CommentCount int    `gorm:"column:comment_count"`
-	Comments     []Comment
+	Title         string `gorm:"column:title"`
+	Content       string `gorm:"column:content"`
+	UserID        uint   `gorm:"column:user_id"`
+	CommentCount  int    `gorm:"column:comment_count"`
+	CommentStatus string `gorm:"column:comment_status"`
+	Comments      []Comment
 }
 
-// func (p *Post) AfterCreate(tx *gorm.DB) (err error) {
+// 题目3：钩子函数
+// 为 Post 模型添加一个钩子函数，在文章创建时自动更新用户的文章数量统计字段。
+func (p *Post) AfterCreate(tx *gorm.DB) (err error) {
 
-// 	 tx.Model(&User{ID: p.UserID})
-// }
+	tx.Model(&User{Model: gorm.Model{ID: p.ID}}).Update("post_count", gorm.Expr("post_count + 1"))
+
+	return
+}
 
 type Comment struct {
 	gorm.Model
@@ -52,11 +57,33 @@ type Comment struct {
 	PostID  uint   `gorm:"column:post_id"`
 }
 
+// 题目3：钩子函数
+// 为 Comment 模型添加一个钩子函数，在评论删除时检查文章的评论数量，如果评论数量为 0，则更新文章的评论状态为 "无评论"。
+func (c *Comment) AfterDelete(tx *gorm.DB) (err error) {
+	var post Post
+	tx.Find(&post, c.PostID)
+
+	if post.CommentCount-1 < 0 {
+		post.CommentCount = 0
+	} else {
+		post.CommentCount = post.CommentCount - 1
+	}
+	if post.CommentCount == 0 {
+		post.CommentStatus = "无评论"
+		tx.Save(&post)
+	}
+	return
+}
+
 func main() {
 	fmt.Println("hello world")
 	db := connectDB()
 
 	// 2. 造点测试数据
+	// users := []User{
+	// 	{Name: "Geektutu"},
+	// }
+	// db.Create(&users)
 	// posts := []Post{
 	// 	{Title: "Go 入门", Content: "Go 基础教程", UserID: 1},
 	// 	{Title: "GORM 技巧", Content: "GORM 高级用法", UserID: 1},
@@ -73,16 +100,16 @@ func main() {
 	// 	{PostID: posts[2].ID, Content: "马克"},
 	// }
 	// db.Create(&comments)
-
+	db.de
 	// 题目1：模型定义
 	createTable(db)
 
 	// 题目2：关联查询
 
 	// 编写Go代码，使用Gorm查询某个用户发布的所有文章及其对应的评论信息。
-	fmt.Println(queryUserPostsAndComments(db, 1))
+	//fmt.Println(queryUserPostsAndComments(db, 1))
 	// 编写Go代码，使用Gorm查询评论数量最多的文章信息。
-	fmt.Println(queryMostCommentsPost(db))
+	//fmt.Println(queryMostCommentsPost(db))
 
 	// 题目3：钩子函数
 
