@@ -46,7 +46,7 @@ type Post struct {
 // 为 Post 模型添加一个钩子函数，在文章创建时自动更新用户的文章数量统计字段。
 func (p *Post) AfterCreate(tx *gorm.DB) (err error) {
 
-	tx.Model(&User{Model: gorm.Model{ID: p.ID}}).Update("post_count", gorm.Expr("post_count + 1"))
+	tx.Debug().Model(&User{Model: gorm.Model{ID: p.ID}}).Update("post_count", gorm.Expr("post_count + 1"))
 
 	return
 }
@@ -61,7 +61,7 @@ type Comment struct {
 // 为 Comment 模型添加一个钩子函数，在评论删除时检查文章的评论数量，如果评论数量为 0，则更新文章的评论状态为 "无评论"。
 func (c *Comment) AfterDelete(tx *gorm.DB) (err error) {
 	var post Post
-	tx.Find(&post, c.PostID)
+	tx.Debug().Find(&post, c.PostID)
 
 	if post.CommentCount-1 < 0 {
 		post.CommentCount = 0
@@ -80,27 +80,27 @@ func main() {
 	db := connectDB()
 
 	// 2. 造点测试数据
-	// users := []User{
-	// 	{Name: "Geektutu"},
-	// }
-	// db.Create(&users)
-	// posts := []Post{
-	// 	{Title: "Go 入门", Content: "Go 基础教程", UserID: 1},
-	// 	{Title: "GORM 技巧", Content: "GORM 高级用法", UserID: 1},
-	// 	{Title: "面试指南", Content: "常见面试题", UserID: 1},
-	// }
-	// db.Create(&posts)
+	users := []User{
+		{Name: "Geektutu"},
+	}
+	db.Create(&users)
+	posts := []Post{
+		{Title: "Go 入门", Content: "Go 基础教程", UserID: 1},
+		{Title: "GORM 技巧", Content: "GORM 高级用法", UserID: 1},
+		{Title: "面试指南", Content: "常见面试题", UserID: 1},
+	}
+	db.Create(&posts)
 
-	// comments := []Comment{
-	// 	{PostID: posts[0].ID, Content: "赞"},
-	// 	{PostID: posts[0].ID, Content: "学习了"},
-	// 	{PostID: posts[1].ID, Content: "收藏"},
-	// 	{PostID: posts[1].ID, Content: "写得好"},
-	// 	{PostID: posts[1].ID, Content: "感谢分享"},
-	// 	{PostID: posts[2].ID, Content: "马克"},
-	// }
-	// db.Create(&comments)
-	db.de
+	comments := []Comment{
+		{PostID: posts[0].ID, Content: "赞"},
+		{PostID: posts[0].ID, Content: "学习了"},
+		{PostID: posts[1].ID, Content: "收藏"},
+		{PostID: posts[1].ID, Content: "写得好"},
+		{PostID: posts[1].ID, Content: "感谢分享"},
+		{PostID: posts[2].ID, Content: "马克"},
+	}
+	db.Create(&comments)
+
 	// 题目1：模型定义
 	createTable(db)
 
