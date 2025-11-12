@@ -46,7 +46,7 @@ type Post struct {
 // 为 Post 模型添加一个钩子函数，在文章创建时自动更新用户的文章数量统计字段。
 func (p *Post) AfterCreate(tx *gorm.DB) (err error) {
 
-	tx.Debug().Model(&User{Model: gorm.Model{ID: p.ID}}).Update("post_count", gorm.Expr("post_count + 1"))
+	tx.Debug().Model(&User{Model: gorm.Model{ID: p.UserID}}).Update("post_count", gorm.Expr("post_count + 1"))
 
 	return
 }
@@ -57,11 +57,18 @@ type Comment struct {
 	PostID  uint   `gorm:"column:post_id"`
 }
 
+func (c *Comment) AfterCreate(tx *gorm.DB) (err error) {
+
+	tx.Debug().Model(&Post{Model: gorm.Model{ID: c.PostID}}).Update("comment_count", gorm.Expr("comment_count + 1"))
+
+	return
+}
+
 // 题目3：钩子函数
 // 为 Comment 模型添加一个钩子函数，在评论删除时检查文章的评论数量，如果评论数量为 0，则更新文章的评论状态为 "无评论"。
 func (c *Comment) AfterDelete(tx *gorm.DB) (err error) {
 	var post Post
-	tx.Debug().Find(&post, c.PostID)
+	tx.Debug().Where("comments.id = ? ", c.ID).Joins("left join comments on comments.post_id = posts.id").Find(&post)
 
 	if post.CommentCount-1 < 0 {
 		post.CommentCount = 0
@@ -70,8 +77,8 @@ func (c *Comment) AfterDelete(tx *gorm.DB) (err error) {
 	}
 	if post.CommentCount == 0 {
 		post.CommentStatus = "无评论"
-		tx.Save(&post)
 	}
+	tx.Debug().Updates(post)
 	return
 }
 
@@ -79,40 +86,21 @@ func main() {
 	fmt.Println("hello world")
 	db := connectDB()
 
-	// 2. 造点测试数据
-	users := []User{
-		{Name: "Geektutu"},
-	}
-	db.Create(&users)
-	posts := []Post{
-		{Title: "Go 入门", Content: "Go 基础教程", UserID: 1},
-		{Title: "GORM 技巧", Content: "GORM 高级用法", UserID: 1},
-		{Title: "面试指南", Content: "常见面试题", UserID: 1},
-	}
-	db.Create(&posts)
-
-	comments := []Comment{
-		{PostID: posts[0].ID, Content: "赞"},
-		{PostID: posts[0].ID, Content: "学习了"},
-		{PostID: posts[1].ID, Content: "收藏"},
-		{PostID: posts[1].ID, Content: "写得好"},
-		{PostID: posts[1].ID, Content: "感谢分享"},
-		{PostID: posts[2].ID, Content: "马克"},
-	}
-	db.Create(&comments)
-
 	// 题目1：模型定义
 	createTable(db)
 
-	// 题目2：关联查询
+	// 造点测试数据
+	testData(db)
 
+	// 题目2：关联查询
 	// 编写Go代码，使用Gorm查询某个用户发布的所有文章及其对应的评论信息。
-	//fmt.Println(queryUserPostsAndComments(db, 1))
+	fmt.Println(queryUserPostsAndComments(db, 1))
 	// 编写Go代码，使用Gorm查询评论数量最多的文章信息。
-	//fmt.Println(queryMostCommentsPost(db))
+	fmt.Println(queryMostCommentsPost(db))
 
 	// 题目3：钩子函数
-
+	// 删除数据
+	db.Delete(&Comment{Model: gorm.Model{ID: 1}})
 }
 
 func connectDB() *gorm.DB {
@@ -149,4 +137,26 @@ func queryMostCommentsPost(db *gorm.DB) (Post, error) {
 	db.Debug().Model(&Comment{}).Select("post_id").Group("post_id").Order("count(post_id) desc").Limit(1).Find(&postID)
 	res := db.Debug().Preload("Comments").Find(&post, postID)
 	return post, res.Error
+}
+
+func testData(db *gorm.DB) {
+	user := User{Name: "Geektutu"}
+
+	db.Create(&user)
+	posts := []Post{
+		{Title: "Go 入门", Content: "Go 基础教程", UserID: user.ID},
+		{Title: "GORM 技巧", Content: "GORM 高级用法", UserID: user.ID},
+		{Title: "面试指南", Content: "常见面试题", UserID: user.ID},
+	}
+	db.Create(&posts)
+
+	comments := []Comment{
+		{PostID: posts[0].ID, Content: "赞"},
+		{PostID: posts[0].ID, Content: "学习了"},
+		{PostID: posts[1].ID, Content: "收藏"},
+		{PostID: posts[1].ID, Content: "写得好"},
+		{PostID: posts[1].ID, Content: "感谢分享"},
+		{PostID: posts[2].ID, Content: "马克"},
+	}
+	db.Create(&comments)
 }
