@@ -101,6 +101,9 @@ func main() {
 	// 题目3：钩子函数
 	// 删除数据
 	db.Delete(&Comment{Model: gorm.Model{ID: 1}})
+
+	// 关闭数据库连接
+	closeDB(db)
 }
 
 func connectDB() *gorm.DB {
@@ -110,6 +113,17 @@ func connectDB() *gorm.DB {
 		panic(err)
 	}
 	return db
+}
+
+func closeDB(db *gorm.DB) {
+	sqlDB, err := db.DB()
+	if err != nil {
+		panic(err)
+	}
+	err = sqlDB.Close()
+	if err != nil {
+		panic(err)
+	}
 }
 
 // 题目1：模型定义
