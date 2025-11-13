@@ -1,0 +1,19 @@
+server:
+  port: 8888
+  env: dev
+  name: my_study_demo
+
+mysql:
+  host: mysql2.sqlpub.com
+  port: 3307
+  user: my_study
+  password: jWmo2yItpMzc9FW6
+  database: my_study_demo
+
+auth:
+  jwt_secret: JmOB9LwvhNkvm9C1LjISZtmrb1mRfFwA
+  token_expiry: 86400
+
+log:
+  path: ./logs/app.log
+  level: info

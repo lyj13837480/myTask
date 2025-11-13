@@ -1,0 +1,2 @@
+{"level":"INFO","ts":"2025-11-13T17:48:32.291+0800","caller":"runtime/proc.go:285","msg":"项目配置初始化成功"}
+{"level":"INFO","ts":"2025-11-13T17:48:32.330+0800","caller":"runtime/proc.go:285","msg":"项目日志初始化成功"}
