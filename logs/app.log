@@ -1,0 +1,66 @@
+{"level":"INFO","ts":"2025-11-13T22:13:42.174+0800","caller":"runtime/proc.go:285","msg":"项目配置初始化成功"}
+{"level":"INFO","ts":"2025-11-13T22:13:42.175+0800","caller":"runtime/proc.go:285","msg":"项目日志初始化成功"}
+{"level":"INFO","ts":"2025-11-13T22:13:42.251+0800","caller":"runtime/proc.go:285","msg":"项目数据库初始化成功"}
+{"level":"INFO","ts":"2025-11-13T22:13:42.252+0800","caller":"runtime/proc.go:285","msg":"项目启动成功"}
+{"level":"INFO","ts":"2025-11-13T22:14:58.338+0800","caller":"runtime/proc.go:285","msg":"项目配置初始化成功"}
+{"level":"INFO","ts":"2025-11-13T22:14:58.338+0800","caller":"runtime/proc.go:285","msg":"项目日志初始化成功"}
+{"level":"INFO","ts":"2025-11-13T22:14:58.414+0800","caller":"runtime/proc.go:285","msg":"项目数据库初始化成功"}
+{"level":"INFO","ts":"2025-11-13T22:16:01.324+0800","caller":"runtime/proc.go:285","msg":"项目配置初始化成功"}
+{"level":"INFO","ts":"2025-11-13T22:16:01.324+0800","caller":"runtime/proc.go:285","msg":"项目日志初始化成功"}
+{"level":"INFO","ts":"2025-11-13T22:16:01.401+0800","caller":"runtime/proc.go:285","msg":"项目数据库初始化成功"}
+{"level":"INFO","ts":"2025-11-13T22:22:44.826+0800","caller":"runtime/proc.go:285","msg":"项目配置初始化成功"}
+{"level":"INFO","ts":"2025-11-13T22:22:44.826+0800","caller":"runtime/proc.go:285","msg":"项目日志初始化成功"}
+{"level":"INFO","ts":"2025-11-13T22:22:44.913+0800","caller":"runtime/proc.go:285","msg":"项目数据库初始化成功"}
+{"level":"INFO","ts":"2025-11-13T22:31:01.896+0800","caller":"gin@v1.11.0/context.go:192","msg":"HTTP Request","method":"POST","path":"/v1/register","status":400,"latency":6.304630583}
+{"level":"INFO","ts":"2025-11-13T22:31:45.332+0800","caller":"gin@v1.11.0/context.go:192","msg":"HTTP Request","method":"POST","path":"/v1/register","status":400,"latency":0.000104667}
+{"level":"INFO","ts":"2025-11-13T22:31:48.398+0800","caller":"gin@v1.11.0/context.go:192","msg":"HTTP Request","method":"POST","path":"/v1/register","status":400,"latency":0.000119042}
+{"level":"INFO","ts":"2025-11-13T22:41:55.330+0800","caller":"runtime/proc.go:285","msg":"项目配置初始化成功"}
+{"level":"INFO","ts":"2025-11-13T22:41:55.330+0800","caller":"runtime/proc.go:285","msg":"项目日志初始化成功"}
+{"level":"INFO","ts":"2025-11-13T22:41:59.577+0800","caller":"runtime/proc.go:285","msg":"项目数据库初始化成功"}
+{"level":"INFO","ts":"2025-11-13T22:43:57.679+0800","caller":"runtime/proc.go:285","msg":"项目配置初始化成功"}
+{"level":"INFO","ts":"2025-11-13T22:43:57.679+0800","caller":"runtime/proc.go:285","msg":"项目日志初始化成功"}
+{"level":"INFO","ts":"2025-11-13T22:43:57.755+0800","caller":"runtime/proc.go:285","msg":"项目数据库初始化成功"}
+{"level":"INFO","ts":"2025-11-13T22:47:00.820+0800","caller":"runtime/proc.go:285","msg":"项目配置初始化成功"}
+{"level":"INFO","ts":"2025-11-13T22:47:01.445+0800","caller":"runtime/proc.go:285","msg":"项目日志初始化成功"}
+{"level":"INFO","ts":"2025-11-13T22:47:04.390+0800","caller":"runtime/proc.go:285","msg":"项目数据库初始化成功"}
+{"level":"INFO","ts":"2025-11-13T22:51:29.682+0800","caller":"runtime/proc.go:285","msg":"项目配置初始化成功"}
+{"level":"INFO","ts":"2025-11-13T22:51:30.223+0800","caller":"runtime/proc.go:285","msg":"项目日志初始化成功"}
+{"level":"INFO","ts":"2025-11-13T22:57:06.685+0800","caller":"runtime/proc.go:285","msg":"项目配置初始化成功"}
+{"level":"INFO","ts":"2025-11-13T22:57:06.685+0800","caller":"runtime/proc.go:285","msg":"项目日志初始化成功"}
+{"level":"INFO","ts":"2025-11-13T22:58:48.525+0800","caller":"runtime/proc.go:285","msg":"项目配置初始化成功"}
+{"level":"INFO","ts":"2025-11-13T22:58:48.525+0800","caller":"runtime/proc.go:285","msg":"项目日志初始化成功"}
+{"level":"INFO","ts":"2025-11-13T23:02:57.595+0800","caller":"runtime/proc.go:285","msg":"项目配置初始化成功"}
+{"level":"INFO","ts":"2025-11-13T23:02:57.595+0800","caller":"runtime/proc.go:285","msg":"项目日志初始化成功"}
+{"level":"INFO","ts":"2025-11-13T23:03:32.888+0800","caller":"runtime/proc.go:285","msg":"项目配置初始化成功"}
+{"level":"INFO","ts":"2025-11-13T23:03:32.888+0800","caller":"runtime/proc.go:285","msg":"项目日志初始化成功"}
+{"level":"INFO","ts":"2025-11-13T23:03:33.320+0800","caller":"runtime/proc.go:285","msg":"项目数据库初始化成功"}
+{"level":"INFO","ts":"2025-11-13T23:06:38.290+0800","caller":"runtime/proc.go:285","msg":"项目配置初始化成功"}
+{"level":"INFO","ts":"2025-11-13T23:06:38.290+0800","caller":"runtime/proc.go:285","msg":"项目日志初始化成功"}
+{"level":"INFO","ts":"2025-11-13T23:06:38.673+0800","caller":"runtime/proc.go:285","msg":"项目数据库初始化成功"}
+{"level":"INFO","ts":"2025-11-13T23:09:27.881+0800","caller":"runtime/proc.go:285","msg":"项目配置初始化成功"}
+{"level":"INFO","ts":"2025-11-13T23:09:27.882+0800","caller":"runtime/proc.go:285","msg":"项目日志初始化成功"}
+{"level":"INFO","ts":"2025-11-13T23:09:28.273+0800","caller":"runtime/proc.go:285","msg":"项目数据库初始化成功"}
+{"level":"INFO","ts":"2025-11-13T23:15:25.128+0800","caller":"runtime/proc.go:285","msg":"项目配置初始化成功"}
+{"level":"INFO","ts":"2025-11-13T23:15:25.129+0800","caller":"runtime/proc.go:285","msg":"项目日志初始化成功"}
+{"level":"INFO","ts":"2025-11-13T23:15:25.520+0800","caller":"runtime/proc.go:285","msg":"项目数据库初始化成功"}
+{"level":"INFO","ts":"2025-11-13T23:15:25.521+0800","caller":"runtime/proc.go:285","msg":"项目路由启动成功"}
+{"level":"INFO","ts":"2025-11-13T23:15:35.228+0800","caller":"runtime/proc.go:285","msg":"项目配置初始化成功"}
+{"level":"INFO","ts":"2025-11-13T23:15:35.229+0800","caller":"runtime/proc.go:285","msg":"项目日志初始化成功"}
+{"level":"INFO","ts":"2025-11-13T23:15:36.085+0800","caller":"runtime/proc.go:285","msg":"项目数据库初始化成功"}
+{"level":"INFO","ts":"2025-11-13T23:17:17.770+0800","caller":"runtime/proc.go:285","msg":"项目配置初始化成功"}
+{"level":"INFO","ts":"2025-11-13T23:17:17.770+0800","caller":"runtime/proc.go:285","msg":"项目日志初始化成功"}
+{"level":"INFO","ts":"2025-11-13T23:17:18.186+0800","caller":"runtime/proc.go:285","msg":"项目数据库初始化成功"}
+{"level":"INFO","ts":"2025-11-13T23:17:46.687+0800","caller":"gin@v1.11.0/context.go:192","msg":"HTTP Request","method":"POST","path":"/v1/register","status":400,"latency":6.47250625}
+{"level":"INFO","ts":"2025-11-13T23:18:09.435+0800","caller":"runtime/proc.go:285","msg":"项目配置初始化成功"}
+{"level":"INFO","ts":"2025-11-13T23:18:09.435+0800","caller":"runtime/proc.go:285","msg":"项目日志初始化成功"}
+{"level":"INFO","ts":"2025-11-13T23:18:10.245+0800","caller":"runtime/proc.go:285","msg":"项目数据库初始化成功"}
+{"level":"INFO","ts":"2025-11-13T23:18:24.205+0800","caller":"gin@v1.11.0/context.go:192","msg":"HTTP Request","method":"POST","path":"/v1/register","status":400,"latency":9.217762}
+{"level":"INFO","ts":"2025-11-13T23:21:34.796+0800","caller":"runtime/proc.go:285","msg":"项目配置初始化成功"}
+{"level":"INFO","ts":"2025-11-13T23:21:34.797+0800","caller":"runtime/proc.go:285","msg":"项目日志初始化成功"}
+{"level":"INFO","ts":"2025-11-13T23:21:35.618+0800","caller":"runtime/proc.go:285","msg":"项目数据库初始化成功"}
+{"level":"INFO","ts":"2025-11-13T23:22:09.908+0800","caller":"gin@v1.11.0/context.go:192","msg":"HTTP Request","method":"POST","path":"/v1/register","status":400,"latency":26.207220667}
+{"level":"INFO","ts":"2025-11-13T23:22:56.159+0800","caller":"gin@v1.11.0/context.go:192","msg":"HTTP Request","method":"POST","path":"/v1/register","status":400,"latency":8.684429917}
+{"level":"INFO","ts":"2025-11-13T23:23:44.174+0800","caller":"runtime/proc.go:285","msg":"项目配置初始化成功"}
+{"level":"INFO","ts":"2025-11-13T23:23:44.174+0800","caller":"runtime/proc.go:285","msg":"项目日志初始化成功"}
+{"level":"INFO","ts":"2025-11-13T23:23:44.548+0800","caller":"runtime/proc.go:285","msg":"项目数据库初始化成功"}
+{"level":"INFO","ts":"2025-11-13T23:23:55.115+0800","caller":"gin@v1.11.0/context.go:192","msg":"HTTP Request","method":"POST","path":"/v1/register","status":200,"latency":6.674349958}
