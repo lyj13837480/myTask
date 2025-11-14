@@ -12,7 +12,23 @@ type Response struct {
 	Msg  string      `json:"msg"`
 }
 
-func Success(c *gin.Context, data interface{}, msg string) {
+func Success(c *gin.Context, data interface{}) {
+	c.JSON(http.StatusOK, Response{
+		Code: 200,
+		Data: data,
+		Msg:  "success",
+	})
+}
+
+func PutSuccess(c *gin.Context, data interface{}) {
+	c.JSON(http.StatusCreated, Response{
+		Code: 201,
+		Data: data,
+		Msg:  "success",
+	})
+}
+
+func SuccessWithMsg(c *gin.Context, data interface{}, msg string) {
 	c.JSON(http.StatusOK, Response{
 		Code: 200,
 		Data: data,

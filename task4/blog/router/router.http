@@ -1,0 +1,78 @@
+### 接口测试 该接口测试需要vscode安装 rest client 插件
+
+### 注册
+PUT http://localhost:8888/v1/register
+Content-Type: application/json
+
+{
+  "username": "te1123",
+  "password": "123456",
+  "email": "123@qq.com"
+}
+
+### 登录
+POST http://localhost:8888/v1/login
+Content-Type: application/json
+
+{
+  "username": "te1123",
+  "password": "123456"
+}
+
+### 创建文章
+PUT http://localhost:8888/v1/post
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJyb2xlIjoidXNlciIsImV4cCI6MTc2MzE3ODMxM30.wN1_PidlEj8siQSEYxKtqJI-TBskWgl53vYJbq3PMEA
+
+{
+    "title": "测试文章",
+    "content": "测试文章内容"
+}
+
+### 获取文章列表
+POST http://localhost:8888/v1/post_list
+Content-Type: application/json
+
+{
+    "page": 1,
+    "page_size": 10
+}
+
+### 更新文章
+POST http://localhost:8888/v1/post/4
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJyb2xlIjoidXNlciIsImV4cCI6MTc2MzE3ODMxM30.wN1_PidlEj8siQSEYxKtqJI-TBskWgl53vYJbq3PMEA
+
+{
+    "title": "测试修改文章",
+    "content": "测试修改文章内容"
+}
+
+### 删除文章
+DELETE http://localhost:8888/v1/post/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJyb2xlIjoidXNlciIsImV4cCI6MTc2MzE3ODMxM30.wN1_PidlEj8siQSEYxKtqJI-TBskWgl53vYJbq3PMEA
+
+### 添加评论
+PUT http://localhost:8888/v1/comment
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJyb2xlIjoidXNlciIsImV4cCI6MTc2MzE3ODMxM30.wN1_PidlEj8siQSEYxKtqJI-TBskWgl53vYJbq3PMEA
+
+{
+    "post_id": 4,
+    "content": "测试评论"
+}
+
+### 获取评论列表
+POST http://localhost:8888/v1/comment_list
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJyb2xlIjoidXNlciIsImV4cCI6MTc2MzE3ODMxM30.wN1_PidlEj8siQSEYxKtqJI-TBskWgl53vYJbq3PMEA
+
+{
+    "post_id": 4,
+    "query_params":{
+      "page": 1,
+      "page_size": 10
+    }
+}
+

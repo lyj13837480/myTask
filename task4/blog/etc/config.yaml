@@ -7,7 +7,7 @@ mysql:
   host: mysql2.sqlpub.com
   port: 3307
   user: my_study
-  password: jWmo2yItpMzc9FW6
+  password: my_study_demo
   database: my_study_demo
 
 auth:

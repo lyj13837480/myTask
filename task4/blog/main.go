@@ -11,7 +11,7 @@ import (
 
 func main() {
 	fmt.Println("hello world")
-	config.InitConfig("task4/blog/etc/config.yaml")
+	config.InitConfig("etc/config.yaml")
 
 	logErr := log.InitLogger()
 	if logErr != nil {

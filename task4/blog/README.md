@@ -22,3 +22,5 @@ go get github.com/natefinch/lumberjack
 
 # 7.jwt
  go get github.com/golang-jwt/jwt/v5
+
+# 接口测试 使用 rest client工具 测试文件位置 router/router.http

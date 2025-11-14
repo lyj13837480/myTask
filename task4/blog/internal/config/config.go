@@ -31,7 +31,7 @@ type Config struct {
 
 	Auth struct {
 		JwtSecret string `yaml:"jwt_secret"`
-		JwtExpire int    `yaml:"jwt_expire"`
+		JwtExpire int    `yaml:"token_expiry"`
 	} `yaml:"auth"`
 
 	Log struct {

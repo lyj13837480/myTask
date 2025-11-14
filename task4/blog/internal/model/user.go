@@ -4,9 +4,9 @@ import "gorm.io/gorm"
 
 type User struct {
 	gorm.Model
-	UserName string `gorm:"index:;size:10;not null" json:"username"`
-	Password string `gorm:"not null" json:"password"`
-	Email    string `gorm:"index;not null" json:"email"`
+	UserName string `gorm:"uniqueIndex;size:10;not null" json:"username" binding:"required,min=3,max=10"`
+	Password string `gorm:"size:100;not null" json:"password" binding:"required,min=6,max=20"`
+	Email    string `gorm:"index;not null" json:"email" binding:"email"`
 	Role     string `gorm:"default:user" json:"role"`
 }
 
