@@ -3,12 +3,12 @@ pragma solidity ^0.8;
 
 contract StudyERC20 {
 
-    mapping(address account => uint256 amount) private  balances;//账户余额
+    mapping(address account => uint256 amount) private  _balances;//账户余额
     mapping(address account => mapping(address spender => uint256)) private _allowances; //授权代扣额度
     uint256 private _totalSupply;//总货币量
-    string private name = "MyToken";
-    string private symbol = "MKT";
-    address private _owner;
+    string private _name = "MyToken";
+    string private _symbol = "MKT";
+    address private _owner ;
 
     event Transfer(address indexed from, address indexed to, uint256 value);
 
@@ -17,6 +17,15 @@ contract StudyERC20 {
     constructor(uint256 initTotalSupply){
         _totalSupply = initTotalSupply;
         _owner = msg.sender;
+        _balances[_owner] = initTotalSupply;
+    }
+
+    function name() public view virtual returns (string memory) {
+        return _name;
+    }
+
+    function symbol() public view virtual returns (string memory) {
+        return _symbol;
     }
 
     function getOwner() public view returns (address){
@@ -25,7 +34,7 @@ contract StudyERC20 {
 
     function mint(address account,uint256 value) public  {
         require(account == _owner,"not owner");
-        balances[_owner] += value;
+        _balances[_owner] += value;
         _totalSupply += value;
     }
 
@@ -33,56 +42,26 @@ contract StudyERC20 {
         return _totalSupply;
     }
 
-    /**
-     * @dev Returns the value of tokens owned by `account`.
-     */
     function balanceOf(address account) external  view returns (uint256){
-         return balances[account];
+         return _balances[account];
     }
 
-    /**
-     * @dev Moves a `value` amount of tokens from the caller's account to `to`.
-     *
-     * Returns a boolean value indicating whether the operation succeeded.
-     *
-     * Emits a {Transfer} event.
-     */
     function transfer(address to, uint256 value) external  returns (bool){
-        require(balances[msg.sender] >= value,"Insufficient balance");
-        balances[msg.sender] -=value;
-        balances[to] +=value;
+        require(_balances[msg.sender] >= value,"Insufficient balance");
+        _balances[msg.sender] -=value;
+        _balances[to] +=value;
+        emit Transfer(msg.sender, to, value);
         return true;
     }
 
-    /**
-     * @dev Returns the remaining number of tokens that `spender` will be
-     * allowed to spend on behalf of `owner` through {transferFrom}. This is
-     * zero by default.
-     *
-     * This value changes when {approve} or {transferFrom} are called.
-     */
     function allowance(address owner, address spender) public view  returns (uint256){
          return _allowances[owner][spender];
     }
 
-    /**
-     * @dev Sets a `value` amount of tokens as the allowance of `spender` over the
-     * caller's tokens.
-     *
-     * Returns a boolean value indicating whether the operation succeeded.
-     *
-     * IMPORTANT: Beware that changing an allowance with this method brings the risk
-     * that someone may use both the old and the new allowance by unfortunate
-     * transaction ordering. One possible solution to mitigate this race
-     * condition is to first reduce the spender's allowance to 0 and set the
-     * desired value afterwards:
-     * https://github.com/ethereum/EIPs/issues/20#issuecomment-263524729
-     *
-     * Emits an {Approval} event.
-     */
     function approve(address spender, uint256 value) public  returns (bool){
         require(value < type(uint256).max,"value is great than max");
         _allowances[msg.sender][spender] = value;
+        emit Approval(msg.sender, spender, value);
         return true;
     }
 
@@ -97,10 +76,11 @@ contract StudyERC20 {
      */
     function transferFrom(address from, address to, uint256 value) external returns (bool){
         require(_allowances[from][msg.sender] >=value,"Approve insufficient balance" );
-        require(balances[from] >= value,"Insufficient balance");
-        balances[from] -= value;
-        balances[from] -= value;
-        balances[to] += value;
+        require(_balances[from] >= value,"Insufficient balance");
+        _balances[from] -= value;
+        _balances[from] -= value;
+        _balances[to] += value;
+        emit Transfer(from, to, value);
         return false;
     }
 
