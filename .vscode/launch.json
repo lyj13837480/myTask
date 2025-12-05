@@ -1,15 +1,26 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Launch Package",
-            "type": "go",
+            "name": "Hardhat Script Debug",
+            "type": "node",
             "request": "launch",
-            "mode": "auto",
-            "program": "${fileDirname}"
+            "runtimeExecutable": "npx",
+            "runtimeArgs": [
+                "hardhat",
+                "run",
+                "${file}",
+                "--network",
+                "hardhat"
+            ],
+            "cwd": "${workspaceFolder}\\solidity\\task3",
+            "sourceMaps": true,
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "outFiles": [
+                "${workspaceFolder}solidity/task3/artifacts/**/*.js"
+            ]
         }
     ]
 }
