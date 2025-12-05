@@ -26,6 +26,7 @@ npx hardhat ignition deploy ./ignition/modules/Lock.js
 npx hardhat test .\test\test_nftAuction.js
 
 测试报告
+```text
 [dotenv@17.2.3] injecting env (2) from .env -- tip: 📡 add observability to secrets: https://dotenvx.com/ops
 
 
@@ -262,3 +263,4 @@ owner:: 0x70997970C51812dc3A010C7d01b50e0d17dc79C8
 ···············································································································
 |  Toolchain:  hardhat                                                                                        │
 ···············································································································
+```
