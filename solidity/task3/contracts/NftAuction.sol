@@ -1,13 +1,14 @@
 // SPDX-License-Identifier: SEE LICENSE IN LICENSE
 pragma solidity ^0.8;
+
 import "hardhat/console.sol";
-import "@openzeppelin/contracts/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 import {AggregatorV3Interface} from "@chainlink/contracts/src/v0.8/shared/interfaces/AggregatorV3Interface.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
+import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
 
-contract NftAuction is Initializable, Ownable {
+contract NftAuction is Initializable, UUPSUpgradeable {
     // 结构体
     struct Auction {
         // 卖家
@@ -45,9 +46,6 @@ contract NftAuction is Initializable, Ownable {
     //发送创建拍卖的event，方便监听
     event CreateAuct(uint256 auctionId, uint256 duration, uint256 startTime);
 
-    constructor() Ownable(msg.sender) {}
-
-    //初始化管理员地址
     function initialize() public initializer {
         admin = msg.sender;
     }
@@ -127,19 +125,25 @@ contract NftAuction is Initializable, Ownable {
         uint256 amount, // 竞拍金额
         address _tokenAddress // 竞拍资产类型
     ) external payable {
-        require(amount > 0, "Bid amount must be greater than 0");
-
         Auction storage auction = auctions[_auctionID];
-        //判断拍卖是否结束
+        require(auction.seller != address(0), "bid auction not exist");
+        console.log(
+            "placeBid",
+            auction.duration,
+            auction.startTime,
+            block.timestamp
+        );
+        // 判断当前拍卖是否结束
         require(
             !auction.ended &&
-                auction.duration + auction.startTime > block.timestamp,
+                auction.startTime + auction.duration > block.timestamp,
             "Auction has ended"
         );
 
         uint payValue;
 
         if (_tokenAddress != address(0)) {
+            require(amount > 0, "Bid amount must be greater than 0");
             // 处理 ERC20
             // 检查是否是 ERC20 资产
             payValue =
@@ -187,10 +191,11 @@ contract NftAuction is Initializable, Ownable {
                 );
             }
         }
+        console.log("amount:", amount);
 
-        auction.tokenAddress = _tokenAddress;
         auction.highestBid = amount;
         auction.highestBidder = msg.sender;
+        auction.tokenAddress = _tokenAddress;
     }
 
     // 结束拍卖
@@ -231,10 +236,8 @@ contract NftAuction is Initializable, Ownable {
         auction.ended = true;
     }
 
-    // 升级函数，改变逻辑合约地址，只能由admin调用。
-    // UUPS中，逻辑合约中必须包含升级函数，不然就不能再升级了。
-    function upgrade(address newImplementation) external {
-        require(msg.sender == admin);
-        implementation = newImplementation;
+    function _authorizeUpgrade(address) internal view override {
+        // 只有管理员可以升级合约
+        require(msg.sender == admin, "Only admin can upgrade");
     }
 }
